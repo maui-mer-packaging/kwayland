@@ -1,0 +1,62 @@
+Name         : kwayland
+Version      : 5.1.0
+Release      : 2
+Group        : System/Base
+License      : GPLv2+
+Summary      : Wayland support for Plasma
+Description  : |
+  Wayland support for Plasma.
+URL          : http://www.kde.org
+
+Sources:
+    - "%{name}-%{version}.tar.xz"
+
+RpmLintIgnore:
+    - devel-file-in-non-devel-package
+    - no-changelogname-tag
+    - library-without-ldconfig-postin
+    - library-without-ldconfig-postun
+
+Configure    : none
+Builder      : none
+
+PkgBR:
+    - kf5-rpm-macros
+    - extra-cmake-modules
+    - qt5-tools
+    - qt5-qttools-linguist
+PkgConfigBR:
+    - Qt5Core
+    - Qt5DBus
+    - Qt5Xml
+    - Qt5Network
+    - Qt5Gui
+    - Qt5Widgets
+    - Qt5Test
+    - wayland-client
+    - wayland-egl
+    - wayland-cursor
+    - wayland-server
+Requires:
+    - kf5-filesystem
+
+RequiresPost:
+    - /sbin/ldconfig
+RequiresPostUn:
+    - /sbin/ldconfig
+
+Files:
+    - "%doc COPYING.LIB"
+    - "%{_kf5_libdir}/lib*.so.*"
+
+SubPackages:
+    - Name: devel
+      Group: Development/Libraries
+      Summary: Development files for %{name}
+      Description: |
+        The %{name}-devel package contains the files necessary to develop applications
+        that use %{name}.
+      Files:
+          - "%{_kf5_includedir}/*"
+          - "%{_kf5_libdir}/*.so"
+          - "%{_kf5_cmakedir}/*"
