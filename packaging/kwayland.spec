@@ -70,7 +70,6 @@ that use %{name}.
 rm -rf %{buildroot}
 # >> install pre
 %kf5_make_install
-%find_lang kcoreaddons5_qt --with-qt --all-name || :
 # << install pre
 
 # >> install post
